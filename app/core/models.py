@@ -34,7 +34,12 @@ class UserManager(BaseUserManager):
 
         if not email:
             raise ValueError('superuser must have an email address')
-        user = self.create_user(email, password, is_staff=True, is_superuser=True)
+        user = self.create_user(
+            email,
+            password,
+            is_staff=True,
+            is_superuser=True
+        )
         # OR
         # user.is_staff = True
         # user.is_superuser = True
@@ -55,6 +60,6 @@ class User(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()
 
     # Defines the default field that we're gonna use for authentication.
-    # It overrides the default username field set in the default user model in Django
-    # to become email.
+    # It overrides the default username field set in the default
+    # user model in Django to become email.
     USERNAME_FIELD = 'email'
